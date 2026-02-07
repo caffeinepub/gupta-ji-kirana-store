@@ -1,0 +1,176 @@
+{
+  "kind": "build_request",
+  "title": "Ecommerce website for Gupta ji kirana store",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a customer-facing ecommerce website for a kirana (grocery) shop named \"Gupta ji kirana store\" with a complete shopping flow: browse products, view product details, add/update/remove items in cart, and place an order.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Make ecommerce website for kirana shop \nWho's name is Gupta ji kirana store"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Site name shown as \"Gupta ji kirana store\" in header and page title",
+        "Customer can browse a product catalog with images, price, and basic details",
+        "Customer can add items to cart, change quantities, and remove items",
+        "Customer can place an order and see an order confirmation with an order ID",
+        "Placed orders persist in the backend and can be retrieved later"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement backend data models and APIs for products, categories, cart/order creation, and order retrieval, with stable storage in the single Motoko actor.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Make ecommerce website for kirana shop \nWho's name is Gupta ji kirana store"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend exposes query/update methods to list products and fetch a product by ID",
+        "Backend supports creating an order from cart line items (productId, quantity) and stores order totals and timestamps",
+        "Backend supports listing orders for the currently authenticated user (Internet Identity principal)",
+        "Data remains available after canister upgrade (use stable storage patterns; add migration only if needed)"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Add an admin interface for shop management to create/edit/delete products and categories and to view incoming orders.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Make ecommerce website for kirana shop \nWho's name is Gupta ji kirana store"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Admin can create, edit, and delete products (name, description, price, unit, category, image)",
+        "Admin can create and delete categories",
+        "Admin can view a list of all orders and order details",
+        "Admin actions are restricted to an allowlist of principals configurable in the backend (default includes the canister controller)"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Build the core frontend pages and navigation: Home/Shop (product list + search/filter by category), Product Details, Cart, Checkout, Orders, and Admin.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Make ecommerce website for kirana shop \nWho's name is Gupta ji kirana store"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Top-level navigation provides links to Shop, Cart (with item count), Orders, and Admin (only visible when authorized)",
+        "Shop page supports searching by product name and filtering by category",
+        "Product detail page shows image, name, price, unit, description, and Add to Cart",
+        "Checkout page collects basic delivery details (name, phone, address, notes) and shows order summary before placing order",
+        "Orders page shows the signed-in user’s past orders with status and totals"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Use Internet Identity for sign-in and gate order placement and order history behind authentication (browsing remains available without sign-in).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Make ecommerce website for kirana shop \nWho's name is Gupta ji kirana store"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Unauthenticated users can browse products and manage a local cart",
+        "Attempting to place an order or view Orders prompts sign-in via Internet Identity",
+        "After sign-in, user can place an order and then view it in Orders"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Define and apply a cohesive visual theme suitable for a local grocery/kirana store (distinct color palette, typography, spacing, and component styling) and enforce it consistently across all pages.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Make ecommerce website for kirana shop \nWho's name is Gupta ji kirana store"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Theme is applied consistently to header, buttons, cards, forms, and typography",
+        "Design avoids default/unstyled UI appearance and uses Tailwind + existing UI components through composition",
+        "Theme does not use a blue+purple primary palette"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Add seed/demo data so the shop has a usable catalog on first run (categories and ~20 common kirana items with prices and units).",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Make ecommerce website for kirana shop \nWho's name is Gupta ji kirana store"
+        ]
+      },
+      "acceptanceCriteria": [
+        "On local deployment, the product list is not empty and contains multiple categories",
+        "Demo items include typical kirana products (e.g., atta, rice, dal, oil, spices, biscuits) with realistic units (kg, g, L, pcs)",
+        "Admin can modify or delete seeded products"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Add required generated images to the frontend as static assets under `frontend/public/assets/generated` and use them in the UI.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Make ecommerce website for kirana shop \nWho's name is Gupta ji kirana store"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Generated images exist in `frontend/public/assets/generated` and are referenced directly by the frontend (no backend image proxying)",
+        "Logo is shown in the header and favicon/app icon is set where applicable",
+        "Hero/banner is shown on the Home/Shop page"
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor (all logic in the main actor file).",
+    "Do not edit files under `frontend/src/hooks/useInternetIdentity.ts`, `frontend/src/hooks/useInternetIdentity.tsx`, `frontend/src/hooks/useActor.ts`, `frontend/src/main.tsx`, or anything in `frontend/src/components/ui`; compose these components/hooks instead.",
+    "No third-party authentication providers; only Internet Identity.",
+    "No external databases or third-party backend services."
+  ],
+  "nonGoals": [
+    "Online payments integration (e.g., Stripe/UPI gateway) is out of scope; checkout results in an order request only.",
+    "Real-time order tracking, push notifications, and chat support are out of scope.",
+    "Delivery partner/driver management is out of scope."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Store logo mark with a simple grocery/kirana motif, clean vector-like style, warm colors (gupta-ji-logo.dim_512x512.png)",
+      "Wide hero banner illustration of a cozy neighborhood kirana storefront and grocery items, warm inviting palette (kirana-hero-banner.dim_1600x600.png)",
+      "Set of 6 category icons in a consistent outline style: Grains, Pulses, Spices, Snacks, Dairy, Household (kirana-category-icons-set.dim_1024x1024.png)"
+    ],
+    "edits": []
+  }
+}

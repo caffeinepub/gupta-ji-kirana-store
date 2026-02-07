@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Build an ecommerce website for a kirana (grocery) shop named \"Gupta ji kirana store\".",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Store logo mark with a simple grocery/kirana motif, clean vector-like style, warm colors (gupta-ji-logo.dim_512x512.png)\n- Wide hero banner illustration of a cozy neighborhood kirana storefront and grocery items, warm inviting palette (kirana-hero-banner.dim_1600x600.png)\n- Set of 6 category icons in a consistent outline style: Grains, Pulses, Spices, Snacks, Dairy, Household (kirana-category-icons-set.dim_1024x1024.png)",
+  "existing_features": [
+    {
+      "id": "feature-create-a-customer-facing-ecommerce-website-for-a-kirana-grocery-shop-named-gupta-ji-kirana-store-with-a-complete-shopping-flow-browse-products-view-product-details-add-update-remove-items-in-cart-and-place-an-order",
+      "title": "Create a customer-facing ecommerce website for a kirana (grocery) shop named \"Gupta ji kirana store\" with a complete shopping flow: browse products, view product details, add/update/remove items in cart, and place an order.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-admin-interface-for-shop-management-to-create-edit-delete-products-and-categories-and-to-view-incoming-orders",
+      "title": "Add an admin interface for shop management to create/edit/delete products and categories and to view incoming orders.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-core-frontend-pages-and-navigation-home-shop-product-list-search-filter-by-category-product-details-cart-checkout-orders-and-admin",
+      "title": "Build the core frontend pages and navigation: Home/Shop (product list + search/filter by category), Product Details, Cart, Checkout, Orders, and Admin.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-use-internet-identity-for-sign-in-and-gate-order-placement-and-order-history-behind-authentication-browsing-remains-available-without-sign-in",
+      "title": "Use Internet Identity for sign-in and gate order placement and order history behind authentication (browsing remains available without sign-in).",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-define-and-apply-a-cohesive-visual-theme-suitable-for-a-local-grocery-kirana-store-distinct-color-palette-typography-spacing-and-component-styling-and-enforce-it-consistently-across-all-pages",
+      "title": "Define and apply a cohesive visual theme suitable for a local grocery/kirana store (distinct color palette, typography, spacing, and component styling) and enforce it consistently across all pages.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-required-generated-images-to-the-frontend-as-static-assets-under-frontend-public-assets-generated-and-use-them-in-the-ui",
+      "title": "Add required generated images to the frontend as static assets under `frontend/public/assets/generated` and use them in the UI.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create an ecommerce website for \"Gupta ji kirana store\" (kirana/grocery shop).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Implement backend data models and APIs for products, categories, cart/order creation, and order retrieval, with stable storage in the single Motoko actor.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Add seed/demo data so the shop has a usable catalog on first run (categories and ~20 common kirana items with prices and units).",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Gupta ji kirana store",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

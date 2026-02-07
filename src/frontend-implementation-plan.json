@@ -1,0 +1,268 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Gupta ji kirana store — frontend ecommerce + admin UI",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Implement customer shopping flow UI: browse, product details, cart management, checkout, and order confirmation.",
+      "acceptanceCriteria": [
+        "Site name shown as \"Gupta ji kirana store\" in header and page title",
+        "Customer can browse a product catalog with images, price, and basic details",
+        "Customer can add items to cart, change quantities, and remove items",
+        "Customer can place an order and see an order confirmation with an order ID",
+        "Placed orders persist in the backend and can be retrieved later"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the app shell, global layout, and route wiring for Shop, Product Details, Cart, Checkout, Orders, Admin, and Order Confirmation; set header branding text to \"Gupta ji kirana store\" and connect page title where needed."
+        },
+        {
+          "path": "frontend/src/router.tsx",
+          "operation": "create",
+          "description": "Add a minimal client-side router (hash-based) and typed route helpers used by navigation and pages to avoid adding new dependencies."
+        },
+        {
+          "path": "frontend/src/pages/ShopPage.tsx",
+          "operation": "create",
+          "description": "Implement the customer-facing product listing (cards with image/name/price/unit) and add-to-cart actions; call backend capabilities via the actor to load products/categories."
+        },
+        {
+          "path": "frontend/src/pages/ProductDetailsPage.tsx",
+          "operation": "create",
+          "description": "Implement product details view (image, name, price, unit, description) and add-to-cart with quantity selection; fetch product data using backend capability via the actor."
+        },
+        {
+          "path": "frontend/src/pages/CartPage.tsx",
+          "operation": "create",
+          "description": "Implement cart view with line items, quantity stepper, remove actions, totals, and navigation to checkout."
+        },
+        {
+          "path": "frontend/src/pages/CheckoutPage.tsx",
+          "operation": "create",
+          "description": "Implement checkout form (delivery name/phone/address/notes) with order summary and place-order action; on success navigate to Order Confirmation with returned order ID."
+        },
+        {
+          "path": "frontend/src/pages/OrderConfirmationPage.tsx",
+          "operation": "create",
+          "description": "Show order confirmation UI with order ID and next actions (continue shopping / view orders)."
+        },
+        {
+          "path": "frontend/src/state/cart.ts",
+          "operation": "create",
+          "description": "Create cart state management (context + reducer or lightweight store) with local persistence (e.g., localStorage) to support add/update/remove and cart count in header for unauthenticated users."
+        },
+        {
+          "path": "frontend/src/lib/money.ts",
+          "operation": "create",
+          "description": "Add formatting helpers for displaying priceInPaise and totals consistently across pages."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Add an admin UI for managing products/categories and viewing incoming orders, visible only to authorized admins.",
+      "acceptanceCriteria": [
+        "Admin can create, edit, and delete products (name, description, price, unit, category, image)",
+        "Admin can create and delete categories",
+        "Admin can view a list of all orders and order details",
+        "Admin actions are restricted to an allowlist of principals configurable in the backend (default includes the canister controller)"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/AdminPage.tsx",
+          "operation": "create",
+          "description": "Create Admin page with tabs/sections for Products, Categories, and Orders; guard the page by checking admin status using backend capability (via the actor) and show an access-denied state for non-admins."
+        },
+        {
+          "path": "frontend/src/components/admin/AdminGuard.tsx",
+          "operation": "create",
+          "description": "Create an admin guard wrapper that uses the actor to determine whether the current caller is an admin and conditionally renders children or an Access Denied view."
+        },
+        {
+          "path": "frontend/src/components/admin/ProductEditorDialog.tsx",
+          "operation": "create",
+          "description": "Add create/edit product dialog form using shadcn-ui components (Dialog, Input, Textarea, Select, Button) composed from the existing UI library; includes fields requested and triggers backend capabilities for create/update/delete. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/admin/CategoryManager.tsx",
+          "operation": "create",
+          "description": "Add category create/delete UI using shadcn-ui components composed from the existing UI library; triggers backend capabilities for category changes. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/admin/OrdersAdminView.tsx",
+          "operation": "create",
+          "description": "Add incoming orders list/detail UI for admins; integrate with backend capability for admin order retrieval once available, and handle authorization failures gracefully."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire Admin route into the router and ensure Admin link is only rendered when the user is authorized as admin (using actor admin status)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Build core pages and navigation: Shop, Product Details, Cart, Checkout, Orders, and Admin, including search and category filtering.",
+      "acceptanceCriteria": [
+        "Top-level navigation provides links to Shop, Cart (with item count), Orders, and Admin (only visible when authorized)",
+        "Shop page supports searching by product name and filtering by category",
+        "Product detail page shows image, name, price, unit, description, and Add to Cart",
+        "Checkout page collects basic delivery details (name, phone, address, notes) and shows order summary before placing order",
+        "Orders page shows the signed-in user’s past orders with status and totals"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/layout/Header.tsx",
+          "operation": "create",
+          "description": "Create top navigation header with logo, Shop/Cart/Orders/Admin links, cart item count badge, and auth controls (login/logout); use shadcn-ui components (Button, Badge, DropdownMenu) through composition. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/OrdersPage.tsx",
+          "operation": "create",
+          "description": "Create Orders page for signed-in users that loads and displays past orders (status, totals, created time) using backend capability (via the actor) and shows empty/loading/error states."
+        },
+        {
+          "path": "frontend/src/components/shop/CategoryFilter.tsx",
+          "operation": "create",
+          "description": "Create category filter UI (pills/select) and wire to Shop page to filter product list; uses backend capability for categories/products via the actor."
+        },
+        {
+          "path": "frontend/src/components/shop/ProductCard.tsx",
+          "operation": "create",
+          "description": "Create reusable product card UI (image/name/price/unit/add-to-cart) used on Shop page; use shadcn-ui Card/Button components via composition. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire all required pages into navigation and routing (Shop, Product Details, Cart, Checkout, Orders, Admin) and ensure none are orphaned."
+        },
+        {
+          "path": "frontend/src/pages/ShopPage.tsx",
+          "operation": "modify",
+          "description": "Add search by product name and category filtering behavior; keep browse experience available without authentication."
+        },
+        {
+          "path": "frontend/src/pages/CheckoutPage.tsx",
+          "operation": "modify",
+          "description": "Ensure checkout shows an order summary (line items + totals) before placing order and provides clear validation/errors."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Integrate Internet Identity sign-in and gate order placement and order history behind authentication while keeping browsing and local cart available.",
+      "acceptanceCriteria": [
+        "Unauthenticated users can browse products and manage a local cart",
+        "Attempting to place an order or view Orders prompts sign-in via Internet Identity",
+        "After sign-in, user can place an order and then view it in Orders"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/auth/LoginButton.tsx",
+          "operation": "create",
+          "description": "Create a Login/Logout button using useInternetIdentity for Internet Identity and clear React Query caches on logout per the authorization component guidance. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/ProfileSetupDialog.tsx",
+          "operation": "create",
+          "description": "Implement first-login profile setup (ask for name) using backend capabilities getCallerUserProfile/saveCallerUserProfile and a modal (shadcn Dialog/Form components); prevent modal flash using the authorization component guidance. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/RequireAuth.tsx",
+          "operation": "create",
+          "description": "Create an auth gate wrapper that, when unauthenticated, shows a friendly prompt and the LoginButton; used by Checkout and Orders routes. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/OrdersPage.tsx",
+          "operation": "modify",
+          "description": "Wrap Orders page content with RequireAuth and handle authorization errors returned by backend traps (show appropriate UI message)."
+        },
+        {
+          "path": "frontend/src/pages/CheckoutPage.tsx",
+          "operation": "modify",
+          "description": "Gate the place-order action behind RequireAuth; keep cart editing and checkout form visible as appropriate but require sign-in before submitting the order."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Integrate ProfileSetupDialog at app level so it can run after successful login and before accessing user-specific data. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Apply a cohesive warm, local kirana-store visual theme across the entire app using Tailwind + existing UI components.",
+      "acceptanceCriteria": [
+        "Theme is applied consistently to header, buttons, cards, forms, and typography",
+        "Design avoids default/unstyled UI appearance and uses Tailwind + existing UI components through composition",
+        "Theme does not use a blue+purple primary palette"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Create global Tailwind base/theme variables (CSS custom properties used by shadcn-ui) with a warm palette (e.g., greens/oranges/earth tones) and consistent typography/spacing; avoid blue+purple as primary."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust Tailwind theme extensions as needed to support the chosen warm palette and consistent radii/shadows, keeping compatibility with existing shadcn-ui token usage."
+        },
+        {
+          "path": "frontend/src/components/layout/AppLayout.tsx",
+          "operation": "create",
+          "description": "Create a shared layout wrapper that enforces consistent page spacing, container widths, and background styling across all pages using Tailwind utilities and composed shadcn-ui primitives. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Adopt AppLayout and ensure all routes render inside the themed layout for consistent styling."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Add required generated images as static assets and wire them into the UI (logo, hero banner, category icons) without backend proxying.",
+      "acceptanceCriteria": [
+        "Generated images exist in `frontend/public/assets/generated` and are referenced directly by the frontend (no backend image proxying)",
+        "Logo is shown in the header and favicon/app icon is set where applicable",
+        "Hero/banner is shown on the Home/Shop page"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/gupta-ji-logo.dim_512x512.png",
+          "operation": "create",
+          "description": "Add generated store logo asset at frontend/public/assets/generated/gupta-ji-logo.dim_512x512.png and ensure it is referenced directly by the frontend."
+        },
+        {
+          "path": "frontend/public/assets/generated/kirana-hero-banner.dim_1600x600.png",
+          "operation": "create",
+          "description": "Add generated hero/banner asset at frontend/public/assets/generated/kirana-hero-banner.dim_1600x600.png and ensure it is referenced directly by the frontend."
+        },
+        {
+          "path": "frontend/public/assets/generated/kirana-category-icons-set.dim_1024x1024.png",
+          "operation": "create",
+          "description": "Add generated category icon set asset at frontend/public/assets/generated/kirana-category-icons-set.dim_1024x1024.png and ensure it is referenced directly by the frontend."
+        },
+        {
+          "path": "frontend/index.html",
+          "operation": "modify",
+          "description": "Set favicon/app icon to use the generated logo at frontend/public/assets/generated/gupta-ji-logo.dim_512x512.png (and keep the page title as \"Gupta ji kirana store\")."
+        },
+        {
+          "path": "frontend/src/components/layout/Header.tsx",
+          "operation": "modify",
+          "description": "Render the header logo using frontend/public/assets/generated/gupta-ji-logo.dim_512x512.png and ensure the store name is visible alongside it."
+        },
+        {
+          "path": "frontend/src/pages/ShopPage.tsx",
+          "operation": "modify",
+          "description": "Add hero/banner section to the Shop page using frontend/public/assets/generated/kirana-hero-banner.dim_1600x600.png and incorporate the category icon set frontend/public/assets/generated/kirana-category-icons-set.dim_1024x1024.png in the category filter area."
+        }
+      ]
+    }
+  ]
+}

@@ -1,2 +1,3 @@
-# gupta-ji-kirana-store
-Exported from Caffeine project: Gupta ji kirana store
+## Gupta ji kirana store
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

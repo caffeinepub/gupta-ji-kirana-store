@@ -1,0 +1,143 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-a-customer-facing-ecommerce-website-for-a-kirana-grocery-shop-named-gupta-ji-kirana-store-with-a-complete-shopping-flow-browse-products-view-product-details-add-update-remove-items-in-cart-and-place-an-order",
+      "featureTitle": "Create a customer-facing ecommerce website for a kirana (grocery) shop named \"Gupta ji kirana store\" with a complete shopping flow: browse products, view product details, add/update/remove items in cart, and place an order.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/lib/money.ts",
+        "frontend/src/pages/CartPage.tsx",
+        "frontend/src/pages/CheckoutPage.tsx",
+        "frontend/src/pages/OrderConfirmationPage.tsx",
+        "frontend/src/pages/ProductDetailsPage.tsx",
+        "frontend/src/pages/ShopPage.tsx",
+        "frontend/src/state/cart.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-an-admin-interface-for-shop-management-to-create-edit-delete-products-and-categories-and-to-view-incoming-orders",
+      "featureTitle": "Add an admin interface for shop management to create/edit/delete products and categories and to view incoming orders.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/admin/AdminGuard.tsx",
+        "frontend/src/components/admin/ProductEditorDialog.tsx",
+        "frontend/src/pages/AdminPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-core-frontend-pages-and-navigation-home-shop-product-list-search-filter-by-category-product-details-cart-checkout-orders-and-admin",
+      "featureTitle": "Build the core frontend pages and navigation: Home/Shop (product list + search/filter by category), Product Details, Cart, Checkout, Orders, and Admin.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/layout/Header.tsx",
+        "frontend/src/components/shop/CategoryFilter.tsx",
+        "frontend/src/components/shop/ProductCard.tsx",
+        "frontend/src/pages/CheckoutPage.tsx",
+        "frontend/src/pages/OrdersPage.tsx",
+        "frontend/src/pages/ShopPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-use-internet-identity-for-sign-in-and-gate-order-placement-and-order-history-behind-authentication-browsing-remains-available-without-sign-in",
+      "featureTitle": "Use Internet Identity for sign-in and gate order placement and order history behind authentication (browsing remains available without sign-in).",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/auth/ProfileSetupDialog.tsx",
+        "frontend/src/components/auth/RequireAuth.tsx",
+        "frontend/src/pages/CheckoutPage.tsx",
+        "frontend/src/pages/OrdersPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-define-and-apply-a-cohesive-visual-theme-suitable-for-a-local-grocery-kirana-store-distinct-color-palette-typography-spacing-and-component-styling-and-enforce-it-consistently-across-all-pages",
+      "featureTitle": "Define and apply a cohesive visual theme suitable for a local grocery/kirana store (distinct color palette, typography, spacing, and component styling) and enforce it consistently across all pages.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-required-generated-images-to-the-frontend-as-static-assets-under-frontend-public-assets-generated-and-use-them-in-the-ui",
+      "featureTitle": "Add required generated images to the frontend as static assets under `frontend/public/assets/generated` and use them in the UI.",
+      "files": [
+        "frontend/index.html",
+        "frontend/src/components/layout/Header.tsx",
+        "frontend/src/pages/ShopPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
